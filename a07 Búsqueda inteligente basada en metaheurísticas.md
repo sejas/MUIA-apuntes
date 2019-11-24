@@ -246,7 +246,7 @@ Las variables tendrán restricciones.
 X es el conjunto de soluciones factibles que satisface las restricciones
 
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-09-30%20a%20las%2017.15.12%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-09-30%20a%20las%2017.15.12.png)
 
 	- **Programación lineal**, existen métodos que permiten resolver el problema de *forma exacta*. El problema es que hay cientos de miles de variables, y el tiempo de cómputo es demasiado alto y por ello usaremos metaheurísticas.
 		- Continuo
@@ -270,7 +270,7 @@ X es el conjunto de soluciones factibles que satisface las restricciones
 			- newton
 
 ### Ejemplo de Programación Lineal Continua
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-09-30%20a%20las%2017.21.31%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-09-30%20a%20las%2017.21.31.png)
 
 Un problema ante de nada hay que modelizarlo matemáticamente
 - ¿Hay algún método analítico que lo resuelve?
@@ -286,7 +286,7 @@ Parte gris es el conjunto de soluciones factibles
 
 ### Programación lineal entera
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-09-30%20a%20las%2017.26.33%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-09-30%20a%20las%2017.26.33.png)
 
 > No se puede redondear al ser entero  
 > Si redondeamos, la solución estaría fuera de la región de soluciones factibles  
@@ -312,7 +312,7 @@ Solución de compromiso, si quieres maximizar solo una
 Maximizar una función === Minimizar la función cambiada de signo
 Y el resultado lo cambiaremos de signo
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-09-30%20a%20las%2017.42.03%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-09-30%20a%20las%2017.42.03.png)
 
 Representación del problema y representación de las soluciones efectivas
 
@@ -340,12 +340,12 @@ Si te dan un ideal, coges el pto más cercano a ese ideal
 
 ### Learnheuristics
 **Learnheuristics (Calvet et al., 2017):**Hibridación de metaheurísticas con aprendizaje automático para la optimización con entradas dinámicas. 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/page21image5584496%202.png) 
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/page21image5584496.png) 
 
 **Mathheuristics**: mezcla de soluciones matemáticas y metaheurísticas
 
 ## Clasificaciones
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/page23image6005280%202.png) 
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/page23image6005280.png) 
 Recocido simulado, nature-inspired
 Trayectorial
 - GA -> Algoritmos genéticos basado en la naturaleza, imita como se reproducen los individuos y está basada en poblaciones
@@ -371,7 +371,7 @@ Trayectorial
 
 ## Historia general
 ## Flujo : Esquema básico de metaheurísticas
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/page30image5900528%202.png) 
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/page30image5900528.png) 
 
 Una solución o una población de candidatos a soluciones
 - Start -> Inicializamos con valores random
@@ -396,7 +396,7 @@ El equilibro es la clave.
 # Clasificación
 Las explicaremos en problemas uniobjetivo y luego pasaremos a multiobjetivo
 Las diferencias son pocas, la diferencia está en el fitness, el objetivo.
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-09-30%20a%20las%2018.08.46%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-09-30%20a%20las%2018.08.46.png)
 
 - Búsqueda Global o Trayectoriales, se van moviendo de solución en solución
 	- **no quedar atrapadas en un óptimo local**
@@ -480,14 +480,14 @@ Si lambda sub k > 0 , x* P(lambda)
 Página 14
 
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.10.09%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.10.09.png)
 
 Este método no podemos sacar todas las mejores soluciones no dominadas.
 No es un método bueno para sacar 
 Es un buen método para comprobar que la solución dada es eficiente o no. Siempre que 
 La forma de saberlo es 
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.09.11%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.09.11.png)
 
 ### Problema beneficio - contaminación
 
@@ -534,7 +534,7 @@ Puede pasar que los epsilon sean muy grandes , en el primer problema que resuelv
 > Nunca vas a pecar de usar  epsilons muy pequeños	  
 En cuanto se actualicen.
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.40.42%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.40.42.png)
 
 > Algoritmo para sacar soluciones óptimas alternativas.  
 
@@ -550,52 +550,52 @@ Lo más fácil es dar unas metas, j¡uno de los objetivos
 
 Voy a comprar uno coche por 20K€, intento gastar menos de 20K€, consumo, a ser posible quiero acercarme a 4 quedarme por debajo de 10
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.47.40%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.47.40.png)
 Cada objetivo se acerque a una meta, ya sea por arriba o por abajo. En ambos casos tengo la misma penalización.
 
 No es un problema lineal, hay que linealizarlo
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.49.38%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.49.38.png)
 
 - d+: Esta por encima de la meta
 	- lo que me sobrepaso por encima de la meta
 - d- : calculo lo que estoy por debajo de la meta
 - d+ + d- = nos queda el valor absoluto
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.51.36%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.51.36.png)
 
 
 
 Ejemplo:
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.52.49%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.52.49.png)
 
 Resolvemos por método de simplex
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.54.35%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.54.35.png)
 
 
 Además podemos ponderar las soluciones
 
 A más grande la Lambda -> Prefiero quedarme corto que pasarme. Porque estamos minimizando.
 Más grande la lambda, se va a hacer cero más rápido, y la otra tendrá más libertad.
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.55.54%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.55.54.png)
 
 Ejemplo
 ¿Qué estamos diciendo al problema?
 Queremos alcanzar el primer objetivo	, quedándonos por debajo
 Queremos alcanzar el segundo objetivo,  quedándonos por encima 2 veces más.
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.57.59%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.57.59.png)
 
 
 ### Casos especiales: Dentro de las metas , dar prioridades
 Una vez resueltos los objetivos de la primera prioridad, buscamos las siguientes objetivos de la siguiente prioridad. Manteniendo las soluciones anteriores encontradas.
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.59.49%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2017.59.49.png)
 
 
 EJEMPLO.
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2018.02.41%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-07%20a%20las%2018.02.41.png)
 
 La primera prioridad se reserva para las restricciones.
 Solo consideramos las restricciones, luego miramos la segunda prioridad
@@ -894,7 +894,7 @@ Tiene poblaciones, Selecciona los que mejor se adapten (mejor resultado en la fu
 	- la mutación aporta diversidad para no caer en óptimos locales
 - ciclo hasta que la condición se satisfaga
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2017.21.04%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2017.21.04.png)
 
 
 - La evaluación de una solución significa calcular el valor de la función objetivo y la violación de restricciones 
@@ -939,7 +939,7 @@ Tiene poblaciones, Selecciona los que mejor se adapten (mejor resultado en la fu
 	- En tal caso, pueden existir individuos con una adaptación al problema muy superior al resto, que a medida que avanza el algoritmo "dominan" a la población. Por medio de una transformación de la función objetivo, en este caso una comprensión del rango de variación de la función objetivo, se pretende que dichos "superindividuos" no lleguen a dominar a la población.
 
 *Problema de Hamming* : quitar soluciones, reducir la población si son muy cercanas
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2017.29.23%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2017.29.23.png)
 
 
 ## Algoritmos genéticos binarios
@@ -947,7 +947,7 @@ Los que más se utilizan. Y los más sencillos.
 
 - EJEMPLO: Minimizar el coste del material de fabricación de un cilindro 
 cuyo volumen sea de al menos 300ml. 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/page10image23958192%202.jpg) 
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/page10image23958192.jpg) 
 donde d es el diámetro y h la altura (0 ≤ d*,*h ≤ 31). 
 
 1. **Modelizar** para entender el problema
@@ -1038,7 +1038,7 @@ alfonso
 		- se suele coger la misma distancia de un padre a la media
 - Se cogen los 2 hijos que den mejor fitness, 
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.12.05%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.12.05.png)
 
 
 
@@ -1052,7 +1052,7 @@ Si los hijos caen en en medio -> favorecemos la explotación
 Si los hijos caen en uno de los lados de los padres, se favorece la exploración.
 Explotación == unificación
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.20.53%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.20.53.png)
 
 ui = 0 -> cojo el extremo inferior
 ui = 1 -> cojo el extremo superior
@@ -1065,7 +1065,7 @@ Si å = 0 , cogemos cualquier valor en el intervalo
 Cuanto más juntos los padres, sus hijos más próximos
 
 ### Cruce Binario Simulado
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.26.04%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.26.04.png)
 
 Si ß < 1 -> cruce es contractivo. los genes de los hijos se encuentran localizados entre los padres este tipo de algoritmos se localizan en la explotación
 
@@ -1075,7 +1075,7 @@ Si ß < 1 -> cruce es contractivo. los genes de los hijos se encuentran localiza
 ### Mutación aleatoria
 Cualquier hijo que esté entre los padres
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.28.46%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.28.46.png)
 
 No da buenos resultados
 
@@ -1088,7 +1088,7 @@ Más utilizado
 
 Una variable al confirmamos como antes.
 El parámetro que damos es la desviación típica
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.31.03%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.31.03.png)
 
 ### Mutación Polinomial 
 …
@@ -1120,15 +1120,15 @@ No tienen cruce, y solo aplican el operador de mutación.
 
 - La versión original (1+1)-EE usaba un solo padre y con él se generaba un solo hijo. Este hijo se mantenía si era mejor que el padre, o de lo contrario se eliminaba (a este tipo de selección se le llama extintiva, porque los peores individuos tienen una probabilidad de cero de ser seleccionados).
 - En la (1+1)-EE, un individuo nuevo es generado usando:
-- ![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/page14image23887504%202.png) 
+- ![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/page14image23887504.png) 
 - donde t se refiere a la generación (o iteración) en la que nos encontramos, y N(0, fi) es un vector de números Gaussianos independientes con una media de cero y desviación estándar.
 
 
 EJEMPLO: 
 Las estrategias evolutivas siempre trabajan con valores reales
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.41.18%202.png)
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.42.19%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.41.18.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.42.19.png)
 
 Comparamos el padre con el hijo y como maximizamos, nos quedamos con el más grande
 
@@ -1137,7 +1137,7 @@ Comparamos el padre con el hijo y como maximizamos, nos quedamos con el más gra
 - De los mu padres, generamos lambda hijos, y de esos hijos, nos quedamos con los mejores.
 	- solo nos quedamos con los hijos
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.43.45%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.43.45.png)
 
 ### Convergencia de las Estrategias evolutivas
 - éxito 1/5
@@ -1152,7 +1152,7 @@ Thomas Back, 1/7 para mu+L -EE
 ## Programación Evolutiva: 
 
 En vez de la Normal(0,1)
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.48.24%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-14%20a%20las%2018.48.24.png)
 
 ## Estrategias Evolutivas vs Programación Evolutiva 
 Estrategia evolutiva -> a nivel de , se permite le recombinación
@@ -1161,14 +1161,14 @@ La Programación Evolutiva usa normalmente selección estocástica, mientras que
 Ambas técnicas operan a nivel fenotípico. 
 La programación evolutiva es una abstracción de la evolución al nivel de las especies, por lo que no se requiere el uso de un operador de recombinación (diferentes especies no se pueden cruzar entre sí).
 En contraste, las estrategias evolutivas son una abstracción de la evolución al nivel de un individuo, por lo que la recombinación es posible. 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/page24image25167744%202.png) 
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/page24image25167744.png) 
 
 ## Algoritmos Genéticos vs otras técnicas evolutivas 
 El AG usa selección probabilística al igual que la Programación Evolutiva, y en contraposición a la selección determinística de las Estrategias Evolutivas. 
 El AG usa representación binaria para codificar las soluciones en un problema, por lo cual se evoluciona el genotipo y no el fenotipo como en la Programación Evolutiva o las Estrategias Evolutivas. 
 El operador principal en el AG es el cruce, y la mutación es un operador secundario. En la Programación Evolutiva, no hay cruce y en las Estrategias Evolutivas es un operador secundario. 
 Ha sido demostrado (Rudolph, 1994) que el AG requiere de elitismo para poder converger al óptimo. 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/page25image25483264%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/page25image25483264.png)
 Los AGs no son, normalmente, auto-adaptativos. 
 
 
@@ -1256,7 +1256,7 @@ Neo-Darwinismo
 	1. Si es peor,  la aceptaremos dependiendo una probabilidad en función de la temperatura
 		1. Método de metrópolis: Uniforme 0,1
 		2. Si es mayor, la aceptamos, si no la rechazamos
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-28%20a%20las%2017.06.08%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-28%20a%20las%2017.06.08.png)
 
 
 > Converge con P=1 si la temperatura diminuye suficientemente lenta  
@@ -1265,7 +1265,7 @@ Neo-Darwinismo
 En la práctica, no se disminuye tan lentamente. Por lo que solo se puede garantizar una solución buena y no la óptima.
 
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-28%20a%20las%2017.10.42%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-28%20a%20las%2017.10.42.png)
 
 - Aceptación -> Función de volmart (exp) 
 - Criterio de parada ->
@@ -1328,7 +1328,7 @@ Han surgido muchos métodos para evitar calcular la exponencial.
 > De una iteración a otra, la solución puede cambiar !!!  
 > Es estocástico, probabilístico  
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-28%20a%20las%2017.39.16%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-28%20a%20las%2017.39.16.png)
 
 
 ## Problemas a los que aplicar
@@ -1348,8 +1348,8 @@ Gran flexibilidad para las restricciones
 
 
 ## Parámetros
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-28%20a%20las%2017.48.18%202.png)
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-28%20a%20las%2017.48.38%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-28%20a%20las%2017.48.18.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-28%20a%20las%2017.48.38.png)
 
 
 ## Variantes
@@ -1417,11 +1417,11 @@ Entonces la aceptaremos con alguna P baja.
 
 - La función de evaluación es ponderada en todos los objetivos
 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-28%20a%20las%2018.30.45%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-28%20a%20las%2018.30.45.png)
 
 ### Solución eficiente
 Si: 
-![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-28%20a%20las%2018.29.01%202.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-10-28%20a%20las%2018.29.01.png)
 
 ## Método de SERAFINI
 Potencialmente Eficiente = PE
@@ -1443,3 +1443,82 @@ Se coge el peor de los casos
 
 # Presentación y Test
 Hay que hacer presentación de 20 minutos sobre NPGA
+
+# a17-10 COLONIAS DE HORMIGAS
+- Alfonso
+- 20191118
+- `05 Tema_5._ColoniasHormigas.pdf`
+
+## Índice
+* 1. Colonias de hormigas naturales 
+* 2. La hormiga artificial 
+* 3. El sistema de hormigas 
+* 4. Otros sistemas de hormigas 
+* 5. Aplicaciones 
+* 6. Optimización multiobjetivo basada en CH 
+* 7. Referencias 
+
+## Colonias de hormigas naturales 
+Algoritmos basados en cómo se comportan las hormigas. Van dejando feromonas y calcular el camino mínimo entre dos puntos.
+
+Además de las feromonas se toma en cuenta la información de la distancia.
+
+Se toma la decisión del camino para que no sea voraz y favorecer la búsqueda.
+
+
+Probabilidad 
+\tau = Lo que cuesta de ir de `i` a `a`
+
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-11-18%20a%20las%2017.15.01.png)
+
+## La hormiga artificial
+Mecanismo probabilístico de construcción de soluciones al problema (un agente que imita a la hormiga natural).
+
+Además tiene una información heurística 
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-11-18%20a%20las%2017.21.03.png) adicional.
+
+### Problema del viajante (TSP) o cartero chino
+Se puede resolver por esta MH.
+
+Hormiga artificial debe elegir un camino con una probabilidad que depende de la cantidad de feromonas (Tau) y la información heurística que se tenga sobre esos arcos ().
+
+La información heurística qué se tiene es la distancia entre dos nodos. Suele ser la inversa de la distancia.
+
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-11-18%20a%20las%2017.24.56.png)
+
+å = 0 -> solo nos fijamos en el heurístico
+ß = 0 -> solo nos fijamos en las feromonas
+
+### Actualización de la feromona
+
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-11-18%20a%20las%2017.34.32.png)
+![](a07%20Bu%CC%81squeda%20inteligente%20basada%20en%20metaheuri%CC%81sticas/Captura%20de%20pantalla%202019-11-18%20a%20las%2017.34.46.png)
+
+1 - ro = cantidad de hormonas que permanece
+
+## Otros sistemas de hormigas
+* 1. Sistemas de hormigas elitistas(*AS**e*) 
+	* a los arcos de la mejor solución de los arcos en concreto, se les suma una cantidad proporcional al parámetro e * el camino mejor (1 / distancia)
+	* Estamos intensificando
+	* mejores resultados que el no elitista
+* 2. Sistemas de hormigas basadas en rankings (*AS**rank*) 
+	* Tomaremos las `w-1` caminos mejores
+	* Solo echamos hormonas a los primeros arcos y en función de su ranking
+	* (w-r) *feromonas
+	* donde r es el ranking
+	* valor típico de w = 6
+	* además al mejor global se le suma una cantidad mayor w*feromonas
+* 3. Sistemas de hormigas max-min (*MMAS*) 
+	* Tenemos una cantidad mínima y máxima de feromonas
+* **4. Sistemas de colonias de hormigas (*ACS*)** 
+	* **Explota más la experiencia acumulada por las hormigas en la búsqueda que el AS**
+	* Para el depósito y evaporación de la feromona solo se considera la hormiga que generó la mejor solución hasta ahora
+	* una nueva actualización (local) de feromona basada en cada hormiga.
+	* Cambia la probabilidad de ir de un nodo a otro cuando `q<q_0` va al nodo que haga máximo el
+	* valor típico de probabilidad de aceptación es 0.9
+	* esta probabilidad es más **determinista**. 
+	* también difiere en cómo se actualiza la feromona
+		* lo que no se evapora * un parámetro `ro=0.1` solo se aplica a los arcos de la mejor-global
+* 5. Sistemas de hormigas mejor-peor  (*BWAS*) 
+* 6. Estudio comparativo 
+* 7. Sistemas de hormigas con búsqueda local 
