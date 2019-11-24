@@ -689,3 +689,352 @@ Críticas, robots que no hacen nada
 		* Planificar acciones (planificacio ́n “reactiva”). 
 		* Predecir situaciones.
 		* Eliminar errores y ambigu ̈edad de los sensores. 
+
+
+# a15-04 Descripción práctica 2
+Dario
+20191008
+
+## Planificación del tema
+reconocimiento de imágenes 
+
+- Escoger entre dos entornos:
+- bloque : **ascensor B2- Aula A3202**
+- bloque 4 y este aula : **ascensor B4 -Aula 3202**
+
+Complejidad de Mapas : se mide en nodos inicial y final.
+De 7 a 10
+
+## Práctica
+Hoy veremos el esqueleto de la práctica
+el siguiente día, grafos, más adelante, 
+
+El 29 de octubre -> presentación de los mapas. Memoria en pdf, 
+De 1 a 6 como máximo
+Calificación es independiente del número de alumnos
+
+Presentación : 
+prueba estática y prueba dinámica
+- estática
+	- 1-NN-fi : near neighbors 
+	- Histograma de la imagen en gris.
+	- contra el dataset de los mapas
+	- 9X%
+- Dinámica
+	- 50% de acierto
+		- está muy bien, porque puede encajar la perspectiva
+	- en su despacho con el vídeo ya grabado
+	- 
+
+Cuántos nodos cogemos ? Mayor tamaño , más nodos.
+> Cuantos nodos , mejor  
+> Más simple, más potente  
+> Intentar conseguir el número mínimo de nodos  
+
+Los nodos ligados por arcos: orientación (teta) y distancia (lambda)
+
+> Son recursivos, un nodo puede tener un grafo dentro, se pueden autollamar  
+
+MAPA -> Representación de del mapa en modo planta con una imagen por cada nodo.
+
+El dataset tendrá entre 60 y 100 imágenes por nodo. Se suele hacer extrayendo los fotogramas con un vídeo.
+
+> Propuesta de navegación en exteriores con un Dron  
+- Por GPS
+- y 
+
+Con grafos >10^3  hace falta algoritmo	s de búsqueda más sofisticados o metaheurísticas. Porque con A* no se podría resolver en tiempo real
+
+Grupo M, usaron el qNN, no el 1NN
+Dividir el número de histograma por , para pasarlos a reales, número euclideos entre vectores
+Consiguieron con q=3 un 98,04%  de éxito
+En estática : Mínimo 98% en estática
+
+> Dataset equilibrado, el mismo nº de casos por cada nodo a reconocer  
+Sin condensar, editar la memoria de un clasificador para reducir al mínimo los casos. Bajando la eficiencia, y mejorando los tiempos.
+Cuantos más ejemplos, mejor reconoce, pero tarda más tiempo.
+
+Tiempo VS Eficiencia
+
+Siguiente clase 15 de octubre -> ¿Cómo modelar el mapa de un entorno?
+- Que el robot lo haga de forma autónoma (es un reto)
+- Hacerlo supervisadamente (el diseñador) y luego inyectarle el mapa al robot
+
+22 de octubre: diseño/test del reconocedor
+
+29 de octubre -> Presentación del mapa para todos los equipos.
+	- la presentación, es un entorno , un grafo y una imagen por cada nodo.
+	- no hace falta el dataset para la presentación
+	- La memoria: transparencias con mapa, y el nombre de todos los miembros del equipo
+
+Estática: reconocedor de landmarks para nuestro entorno y la eficiencia de nuestro dataset.
+Podemos elegir otro reconocedor. Por ejemplo en vez de 1-NN -> Redes convucionales.
+
+Reconocedor dinámico -> OpenCV
+
+Reconocedor estático, para validar usaremos leaving 1 out.
+
+
+
+- [ ] Grabar vídeo fingiendo que somos el robot
+- [ ] Martes y jueves de noviembre -> presentación de pruebas estática y dinámica D2207 . Turno de mañana.
+	- [ ] por orden de llegada, con solicitud de email
+- [ ] En dinámica entregar 2 vídeos
+
+
+
+
+
+
+
+
+Preguntas:
+- El reconocedor redondea al nodo más cercano?
+- Cuantas personas hacen la presentación del reconocido dinámico en casa?
+-  cuanto dura la presentación del 29 de octubre?
+- Podemos usar reconocedores para estático y dinámico?
+- la presentación del mapa se entrega en moodle?
+- 
+
+
+
+
+
+
+
+# a15-05 Descripción práctica 3 : Teoría Mapas Topológicos Visuales
+Dario
+20191015
+
+## 
+Si el mapa no está bien hecho.
+Ciudad nueva, si 
+> Programación de actuación  
+
+> Si el robot percibe todo lo que necesita, el mapa no es necesario  
+
+> Kubiski: el mejor mapa es el entorno  
+
+
+> Si no tenemos representación del mundo  
+> Del entorno con un mapa  
+> Se limita a vivir el “presente” y a reaccionar lo que le pase  
+> No podemos planear rutas ni nada.  
+> Ni pasado / ni futuro  
+
+Los animales, no tienen ni pasado ni futuro, porque no son capaces de representar (modelar) el mundo
+
+Años 30
+Dos escuelas
+- alemanas
+	- borgan, 
+		- experimentos con primates
+		- tenerife -> casa amarilla
+			- edificio que hizo keller
+			- se sospechaba que keller era espía alemán
+			- canarias sitio importante para la guerra con áfrica
+			- preparaba un centro de operaciones de la marina del reig
+			- Experimentos
+				- habitaciones de la casa amarilla con alimentos
+				- paseaba a los primates y les enseñaba la comida
+				- después los soltaba , e ignoraban los alimentos e iban directamente a la zona superior
+					- tenían mapas cognitivos/espacial que les hacían
+						- no se demosotró
+						- inteligencia en los primates 
+						- psicología cognitiva
+					- hipótesis : no hacían caso de la información inmediata , utilizaban 
+				- Primates de Guinea, porque estaba cerca de canarias
+				- Experimento 2: prueba del espejo
+					- los perros : ladran a sus reflejos
+					- prueba de que existo y me reconozco
+						- mapa de interacción, y diferencia a si mismo del resto
+					- más ladre y se enfurece, se retroalimenta
+- americana
+	- tolloman
+		- experimento con roedores
+			- resolver un laberinto 
+		- hurracas
+		- tienen un hipocampo muy desarrollado
+			- permite recuperar
+		- memoria -> recuerdo -> representación de la realidad
+		- Ardillas
+		- Mapa tipológico, conjunto de lugares con enlaces (similar a grafo)
+			- 
+
+
+> Mapa métrico: navegación más exacta, porque tenemos las coordenadas del mundo  
+
+Navegación tipológica visual - 5 o 10 metros de margen de error
+Con mapas híbridos (visual + coordenadas) precisión sub métrica o sub milimétrica
+
+## Mapa métrico y visual tipológico para navegación interna de un Dron
+Juan pablo fuentes, darío marvall y Javier de Lope
+
+Dos procedimientos para detectar
+- argonometría
+	- podríamos actualizar la posición del robot
+	- induce errores acumulativos
+	- parámetros de velocidad y orientación
+	- ecuaciones diferenciales, 
+	- las derivadas se aproximan a diferencias
+- Telefonía móvil con GSM : `GSM Localization`
+	- en qué coordenadas físicas están
+	- actualizar la posición con las antenas, es un servicio de telefonía
+- Tags RFID (Radio localización de interiores)
+	- instalando pegatinas, como landmarks
+
+Mapa tipológico visual
+Información cualitativa, de alto nivel semántico.
+Estoy en la … “biblioteca”, “cafetería”
+Según eso se puede definir los papeles de esos agentes, mesas
+
+
+## Práctica
+TFM -> `TFM Navegación Mapas Topológicos.pdf`
+De 4 a 7 nodos en el mapa (entre 7 y 10) - en el pasillo 1 nodo es suficiente, se pueden poner más nodos de seguridad si giramos
+> El mínimo necesario  
+> menos nodos es más robusto, para construir y testear  
+> 5 serán suficientes  
+
+
+- Generación de un Mapa
+	- Pedir el plano al centro de operaciones o mantenimiento:
+![](a15%20ROBOTS%20AUTO%CC%81NOMOS/page13image357733248%202.jpg)
+	- Origen y destino
+	- crear nodos intermedios
+		- cada nodo debe ser característico, fáciles de reconocer
+		- reconocimiento dinámico con un vídeo 
+		- 
+
+Calcular la distancia entre dos puntos = arcotangente entre dos puntos
+Nodos -> arcos y distancias
+
+Robots autónomos en 
+
+- Diferentes perspectivas.
+	- te pones en el landmark y sacas un vídeo
+
+![](a15%20ROBOTS%20AUTO%CC%81NOMOS/Captura%20de%20pantalla%202019-10-15%20a%20las%2020.00.00%202.png)
+
+
+
+Tema de investigación
+Mapa autónomo por el robot
+Robot que leyera mapas y creara un mapa métrico 
+
+Text Data Mining -> programas capaz de entender texto
+- Reto de tesis doctoral
+
+Se suele usar mapa de boronoy, un mapa topológico visual de forma autónoma. Soltarlo en un punto inicial del entorno y recorrer lineas rectas de forma aleatoria
+
+El nodo inicial sería la coordenada de origen respecto a los que el resto de nodos se situarían.
+
+## System Nautilus de aganova Group
+Dos entornos en los que no es necesario que el robot tenga un mapa:
+
+Startup del parque tecnológico de Málaga
+El robot es una esfera, que se desplaza en tuberías
+Éxito en España y filial en EEUU
+Con diferencia sonora, comprueba si hay una fuga.
+Se traslada linealmente, y va captando emisores de patrones de sonidos que va actualizando los nodos o puntos claves.
+
+> El final de viaje , no es un telón que cae, sino un silencio total  
+
+## Microcápsulas médicas
+Tragas, cámaras, capta imágenes y CPU
+evita colonoscopias
+se extrae y se sacan las imágenes
+Puede emitir radiofrecuencia
+
+Vídeos: medical microcapsuls, son solo captadores (sensores)
+
+Se reconduce por imanes o radiofrecuencia (manualmente), guiando un filamento para que se mueva. El médico la guiaría.
+
+cirugía 
+
+
+# Práctica
+Mapas topológicos visuales
+El próximo día , pautas técnica  -> última clase presencial, luego realización de la práctica.
+22 presentación del Diseño del reconocedor y presentación
+
+- [ ] El 29 , presentación del mapa
+
+
+
+
+
+# a15-06 Núcleo básico del reconocedor de landmarks de imágenes
+
+Hemos definido el mapa de navegación
+Grafo con nodos
+- [ ] Para el próximo 29 presentación de todos los equipos con su **mapa**
+	- [ ] Grafo, con perspectiva del robot
+	- [ ] 1 sola imagen representativa asociada por nodo (para saber dónde está el robot en cada momento)
+
+- Cuantos más nodos 
+	- mejor navegación - menos se pierde
+		- más fiabilidad al navegador si vamos detectando nodos intermedios
+	- pero más difícil de reconocer
+
+- Las cámaras de gran angular se puede solventar el fallo de perspectiva
+
+> Un reto sería que la eficiencia en dinámica sea igual que en estática  
+
+- [ ] Miembros de equipo
+- [ ] Plano
+
+
+[Presentación PAUTAS](https://moodle.upm.es/titulaciones/oficiales/pluginfile.php/2092005/mod_resource/content/1/Pautas%20desarrollo%20y%20pruebas%20del%20reconocedor%20de%20landmarks%20%28%2022%20de%20octubre%29.pdf)
+Rectas , orientaciones fijas
+
+[Enunciado de la Práctica de mapas topológicos visuales](https://moodle.upm.es/titulaciones/oficiales/pluginfile.php/2098344/mod_resource/content/1/Enunciado%20pr%C3%A1ctica%20mapas%20topol%C3%B3gicos%20visuales%20%28%2022%20de%20octubre%29.pdf)
+
+> El reconocedor de 1NN se basa en las distancias euclideas de los histogramas normalizados de las imágenes.  
+El reconocimiento por histogramas, es 
+El histograma normalizado de grises es más robusto
+
+> se pueden sacar los histogramas en diferentes luces, para comparar que no al estar normalizado en blanco y negro no cambiarán tanto.  
+
+- [ ] Hay que crear un dataset de 60 imágenes por cada nodo, en el que entrenar nuestro reconocedor
+
+> Un parámetro importante para q-NN es la memoria  
+> si P labeled instances   
+> q siempre se coge impar para que no haya empate  
+
+La memoria del reconocedor será la propia información del dataset
+
+> Cuantas más imágenes tengamos de cada nodo, más eficiente será el reconocedor  
+
+## 1-NN
+Usaremos 1-NN con el umbral ajustado
+- Conjunto de datos etiquetados
+- me llega histograma normalizado a reconocer
+- cojo el primer caso
+	- hay que ir jugando con el ∂ delta hasta ver cual me funciona mejor
+- Si el umbral no es el mínimo, no clasificamos
+
+> Hay que optimizar el ∂ para mejorar la eficiencia del reconocedor  
+
+Lazy learning, no necesitamos reprogramar el reconocedor, solo la memoria.
+Se añade un caso nuevo a la memoria y el reconocedor funcionará bien.
+
+
+## Test
+Media del clasificador
+`True error rate = errores en los ejemplos de test/P`
+
+Estático -> 95% de éxito
+Memoria 
+
+
+Ejemplo vídeo:
+`1. Escalera -> 2. Zona de estudio -> 3. Pasillo -> 4. Laboratorio -> 3. Pasillo -> 5. Sala Openinnovation -> 3. Pasillo -> 6. Conserjería -> 7. Aula`
+El pasillo sería más correcto, si el pasillo no fuera el nodo 3 siempre
+
+
+- DUDAS
+	- Por correo o por tutorías
+		- Dataset
+		- clasificador
+		- testeo

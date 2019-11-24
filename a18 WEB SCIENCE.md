@@ -587,3 +587,1488 @@ Presentación de 2007
 	- Tienes que hacerlo directamente, sin librerías
 
 Actualmente usamos herramientas híbridas
+
+
+
+
+
+
+# a18-04- Recommendation Systems 2
+
+Sesión 29 de noviembre
+En teleco , instituto de panel solar
+Openscience
+
+- [ ] Próximo día traer ordenador
+
+Gorro investigador para justificar si algo funciona o no.
+
+Debatiremos sobre ¿Cómo hacer una evaluación?
+
+La próxima semana Carlos Badenes (estudiante de doctorado)
+Mucho tiempo en la empresa
+Modelos probabilísticos de tópicos, evolución de bolsas/vectores de palabras
+
+- [ ] intentar leer los papers recomendados
+
+> Cuando hay mucha subjetividad funciona muy bien  
+> Por eso en política es un sitio donde funciona muy bien  
+> Sobre cosas objetivas es más difícil  
+
+
+# Dos tipos de sistemas de recomendación
+- Collaborative filtering
+	- no nos 
+	- las cosas que estoy recomendando me da igual
+	- solo nos centramos en la matriz usuarios / items
+	- People who bought this also bought that
+- Content-based recommendation
+	- cajón de sastre
+	- análisis
+	- enriquecemos la matriz 
+	- metemos algo sobre los items 
+		- analizar el texto de los libros
+	- SUELEN SER HÍBRIDOS con collaborative
+	- En Content based -> Hay arte, metodología , pero no hay ninguna librería
+	- Agrega descripciones de esos items
+
+> No hay librerías puras de recomendación  
+> Hay metodologías  
+> Hay mucho arte  
+> Por las características de cada problema que queremos filtrar  
+
+
+## Ventajas inconvenientes y características que debemos tomar
+En la evaluación, es el contenido interesante
+
+### Survey o Review
+Hay revistas que se especializan en realizar surveys cada 5 años
+> Pasquale Lops et. al., “Content-based Recommender Systems: State pf the Art and Trends”, Recommender Systems Handbook, 2010   
+Suelen ser los más citados
+ACM computing surveys o review
+
+### Vision papers
+En área de web semántica. Web semantic journal, en enero de 2020 saldrán vision papers , diciendo que en los próximos 5 años debemos ir en este área
+Es interesante porque nos dan challenges
+
+> El éxito es combinar un par de surveys + vision papers para tener una visión global, pasado y futuro  
+
+Conferencias fundamentales, ahí se discuten 
+
+Papers normales, describen experimentos
+
+## Arquitectura típica
+![](a18%20WEB%20SCIENCE/page8image63548592%202.png) 
+-> TF/DF (term frecuency / document frecuency)
+	- inverse document frecuency
+	- aparece mucho en un documento, y no en el resto -> término muy descriptivo
+
+- Fuente de información
+	- IMDB, revistas, 
+- Content analyzer
+	- textos (mejor trabajar a nivel de palabra)
+		- sinopsis, reviews ->analizarlo con NLP
+			- bag of words ->representamos palabras y documentos, frecuencia de la palabra lematizada
+				- se eliminan stop words, director no será 
+				- verbos , nombres , adjetivos, adverbios (en sentimiento califican)
+			- n-gramas (precursor word-embedding) (nivel de letra)
+				- letras en el corpus de pla
+				- trigazas, combinación 
+				- son útiles  para determinar si dos cadenas son iguales
+					- variaciones de palabras: a coruña , la coruña y coruña a
+						- las ventanas de trigramas.
+				- trabaja a función de letra
+				- para corregir palabras
+				- 
+			- **word-embedding**
+				- operaciones con vectores
+
+> “Quisiste decir de google no es una recomendación”  
+> Los correctores de palabras no son recomendadores  
+
+- Al analizar el contenido convertimos , items en vectores
+	- estructuramos el contenido
+	- conseguimos items prespresentados
+
+### Profile Learner
+Con información sobre usuarios y cómo reaccionan ante nuestro contenido
+
+> Aprendemos perfiles  
+Con feedback, conseguimos reforcement
+
+- Podríamos aplicar clustering (descriptivo) y se podría convertir en predictivo
+
+Contamos con y tenemos un 
+- input: item
+- supervisado
+- user profiles
+	- usuario= vector de items / conceptos
+	- si un usuario mira muchas películas de terror
+		- en su perfil aparecerán muchos términos de terror: miedo
+
+Si llegan `New Items` no tenemos problemas, 
+Con collaborative recomendation sí tenemos el problema de cold start
+Con content recomendation no, si llega una película de terror, te la puedo recomendar
+
+## Filtering Component == RECOMENDER  
+- Cualquier algoritmo que nos permita detectar similaridad
+	- vector space models
+		- consenos sobre vectores
+	- naive bayes
+	- nearest neighbours
+	- rule-based induction
+		- no funciona en todas las áreas
+		- árboles de decisiones (que podemos explicar) -> XIA
+	- …
+	
+> ¿Es importante dar feedback de por qué?  
+Factor psicológico, me gasto mucho dinero en una casa, quiero una explicación
+
+
+- Tipos de resultados
+	- si/no - true/false
+		- normalmente los sistemas nos darán un score
+		- determinamos el thresehold
+	- ranking de recomendaciones
+		- es lo que se suele hacer
+	
+La evaluación es diferente para cada tipo
+
+
+### Ventajas content based
+- It does not take into account other users (the model for every user is independent from the others) 
+- Recommendations are easier to explain 
+- Cold-start problem for new items is easily handled 
+
+### Desventajas content based (Es arte, feature selection, )
+- Content analysis may be limited if not enough information available 
+	- Too dependant on the selected attributes 
+- Overfitting 
+	- Recomendaciones obvias, no se valora
+- It does not consider the wisdom of the crowd (collective intelligence) 
+	- Cold start with new users 
+		- se suele preguntar al principio para categorizarte en un cluster
+
+
+Introducir outlayer, introducir novedad, no siempre recomendar lo mejor.
+
+## Collaborative filtering
+Hay dos tipos
+- **Memory based**
+	- usan/explotan toda la base de datos -> LENTO
+	- un usuario llega
+		- explotar correlaciones entre usuarios
+			- damos la vuelta a la matriz y los usuarios son nuestros futures
+		- usuarios como features
+		- correlaciones
+			- pearson, spearman, kendall
+	- cogemos los k-most similar
+	- agregas información, unes los vectores 
+		- hacemos una recomendación basada en los k usuarios más parecidos a ti
+	- Son recomendaciones de clusters
+- **Model based**
+	- predecir una celda
+		- cada una de estas celdas es un problema a resolver
+		- queremos predecir cada una de estas celdas de la matriz usuarios/items
+	- lenta para entrenar, rápida para predecir
+		- cada día o semana cachea , precomputa todas las celdas
+		- no suelen ser sistemas de tiempo real
+	-  avoide overfitting
+
+### Ventajas Collaborative filteriing
+no hace falta hacer content analysis para recomendar, da igual que tipo de producto es
+
+### Desventajas Collaborative filteriing
+- cold start para items y usuarios
+- recomendación son más difíciles de explicar (innovative user interfaces)
+	- explicar puede implicar los gustos de otros usuarios
+
+## Cómo evaluamos los resultados
+> las evaluaciones tienen que tener una hipótesis detrás  
+
+> definir **baseline** distribución, datos con los que trabajo (filtro usuarios que recomiendan? cojo todos los usuarios? …)  
+> no podemos tomar todos  
+> no podemos mezclar , los que caen en esa película por accidente + los que caen por tu recomendación  
+
+> **assumption** : la clave para que tu evaluación sea válida. Normalmente tenemos solo un disparo  
+> distribución del visitando y el rating explícito sobre películas es similar antes y después  
+> 	Antes:   
+> 		con recomendación: 20k vieron la peli, 5k dieron opinión   
+>  		sin recomendación: 30k sin recomendación	, 10k dieron opinión   
+>  	Después:   
+> 		con recomendación: 25k vieron la peli, 7.5k dieron opinión   
+>  		sin recomendación: 30k sin recomendación	, 9k dieron opinión   
+> Hay que aplicar  
+> Nos gustaría aplicar un gold standard ->   
+> 	Cómo se construye un buen **gold standard**  
+
+La evaluación AB-TESTING
+
+> **Contraste de hipótesis** (estadística)  
+> T-Value  
+> si realmente son   
+
+
+
+
+> ¡IMPORTANTE! ESTA ES LA MARCA DE ESTE MASTER  
+> poder explicar nuestras conclusiones con el método científico  
+
+Hipótesis
+1. el *algoritmo x* SISTEMA (el UI y otros componentes ) permite  mejorar la percepción de los usuarios sobre los sistemas reocmendados
+2. Conseguimos más anotaciones explícitas , se evaluará de otra manera 
+	1. la evaluación será contar
+3. El algoritmo X predice el rating que el usuario Y va a poner el sistema con mayor precisión
+	1. binario -> precisión, recall
+	2. POSIBILIDAD Gold standard
+
+
+Social, Psicological science -> evaluación cualitativa mediante tests de usuarios
+Computer science -> evaluación cuantitativa
+
+
+- La construcción de un gold standard, nos permite aplicar nuestros algoritmos todas las veces que quiera.
+	- determinar si nuestro sistema predice los ratings de la gente que va a dejar
+	- POSIBILIDAD de Gold standard
+
+**Evaluación**
+BBDD
+80% training
+20% test
+K-FOLD Cross validation
+
+Otra opción podríamos considerar el tiempo para hacer la división de 
+Técnica de embeddings para detectar el orden
+
+### ¿Cómo crear el gold standard?
+Quiero tener el userX - Item Y -> predecir el Z (true/false *binario* o % *regresión*)
+- GS1 - Me interesa el valor concreto de la predicción del rating
+	- comparar la predicción con el resultado final
+	- y hacer una agregación del error (sum square error)
+	- mi gold standard es la propia base de datos
+	- se suele aplicar mucho para el cold star problem
+		- un usuario acaba de llegar
+		- tiene pocas recomendaciones, tú puedes prerellenar , estimar otra ratings para 
+	- calculamos el `rock curve`
+- GS2 - Me interesa saber que una película le gusta más 1 que a otro. Nos interesa el orden, el ranking. Orden de todas las películas para un usuario dado.
+	- nos permite predecir el ranking
+	- como google el orden de las “preferencias” / “búsquedas”
+	- lo importante es olvidarnos de los números
+	- y evaluar lo que podemos ofrecer está en linea con lo que el usuario quiere
+	- Crearíamos una nueva base de datos Prima, para tener una 
+		- para cada usuario, una lista ordenada de preferencias
+		- El gold standard será la BBDD y nuestra BBDD  prima que contiene los vectores ordenados auténticos
+		- Pasamos el problema numérico de square error a -> Information retrieval
+	- se pone un límite a la lista ordenada
+		- 1 -> el que más me gusta
+		- 5 -> 
+		- 10 -> 
+			- por google
+	- distancia de vectores
+		- distancia ordenada, mirar el orden concreto
+			- técnica de comparar vectores ordenados -> **Jensen-Shannon**
+		- podemos comparar el vector como un set
+			- Precisión and recall : He devuelto el resultado 
+			- P@1 he acertado en la primera peli 0,1 ? , P@5, P@10
+				- en cuantas he acertado
+		- se acerca más a la parte psicológica y será fácil de comprobar
+		- 
+
+
+> problema de recall -> lo que estamos recuperando es todo lo que podemos recuperar?  
+
+
+Sentiment analysis ->  veremos ***
+
+
+## Evaluación, datasets y challenges
+
+
+
+## Trends
+- Trust: confiar 
+- recomendaciones basadas en grupos
+	- es más difícil de evaluar
+	- cómo hacer una recomendación que les gusta a todos
+	- 5 libras por booking en un restaurante
+- Multi-criteria
+	- usuarios - items
+	- en vez de matriz , tenemos un “cubo”
+	- limpieza, ruido …
+- User context: podemos tener más datos
+- Explicaciones
+	- XIA - normativa para explicar
+- Explotación de grafos
+	- no tensemos, un grafo completo, item/user context
+	- cross modal
+		- imágenes + textos , 
+- semantic tags/folksonomies
+	- y añadir más contexto a la información
+- re-rating
+- analysis de otros tipos
+
+## Conferencias
+Conferencias top 1 -> **ACM RecSYS**
+CHI -> Computer Huan interaction
+
+WWW Conference -> Knowledge graph
+
+
+> En web science , los experimentos no suelen ser reproducibles  
+> Recomendación : empezar y mejorar el gold standard, y luego pasar a las asunciones, y finalmente test cualitativos de usuarios.  
+
+
+
+# a18-05 
+
+- carlos badenes
+- 
+
+## How similar are these texts?
+
+- Words + Freq
+	- Pros
+		- easy
+		- confident
+	- Cons
+		- - semantic
+		- +++ 
+- character + Freq
+	- Pros
+		- multilingual
+		- mistake 
+	- Cons
+		- features is constant (número de letras)
+- n-gram character + freq
+	- Pros
+		- easy
+	- Cons
+		- 
+
+## Bag of Words
+Cada texto es una bolsa de features
+- Tenemos que identificar las unidades mínimas del texto `Tokens`
+- Decidir trabajar a nivel de palabra o frase
+- Tokens
+	- su problema son multi-words
+		- Inteligencia Artificial
+		- My tokens ;) are the best
+			- ;) no se entiende como un emoji, se separaría 
+- Definir, Describir y Eliminar **stop words**. Palabras que no tienen relevancia porque son muy comunes
+	- Si no queremos definirlas, podemos usar esta lista: github.com/stopwords-iso
+		- hay que revisar la lista para adaptarla a nuestra temática
+- **Stemming == Lematizar** : unificar las palabras según su variación de número, genero, tiempo. Cogiendo solo el core lema de las palabras
+	- Rules-based
+		- podría ser usado para multiidioma
+		- es más eficiente 
+	- Dictionary-based (lemmas)
+		- asdf
+	- N-Gram Steamming
+		- Ejemplo
+			- broomstick: *b,br,ro,oo,om,
+			- thresholdj
+		- El lema sería el número mínimo 
+		- Lo malo es que podemos obtener lemas que no son palabras válidas
+
+- Binary Bag of Words
+	-  si está la palabra, pongo un 1
+	- Si no tiene la palabra , pongo un 0
+	- Hay muchos 0s
+	- Lo malo es que perdemos la frecuencia de las palabras, solo nos fijamos en si aparece o no
+
+- Term-Frequency Bag-of-Words
+	- en vez de poner 1-0, pondremos el número de frecuencia. Número de veces que aparece una palabra en el texto
+
+- Scaled TF Bag-of-Words
+	- usamos una escala, frecuencia/nº de palabras
+
+Consideramos también las frecuencias del resto de documentos. Para identificar la relevancia en el corpus.
+- TF-IDF Bag-of-Words
+	- frecuencia/nº de palabras * log (nº de textos / nº de textos en los que aparece)
+		- 
+
+## VECTOR SPACE MODEL
+Matriz usando lo que queramos (TF-IDF, binary …)
+
+## Distance Metrics
+- Euclidean
+	- terms frequency no es lo mejor
+- manhattan
+- chebychev
+- minkowski
+- Mahalanobis
+	- si solo usamos solo la frecuencia no escalada, usaremos esta técnica, y no las otras)
+
+
+- **triangle inequality**
+
+- 
+
+
+## Text similarity
+### Jaccard Index
+Considera la intersección
+
+### Cosine Similarity
+Considera el ángulo
+~Es la más utilizada~
+
+
+# Text Similarity Test Collab
+Collab: https://colab.research.google.com/drive/1_afvnz5RhZRe6jbxdIY-AI912JaEiXvv?authuser=1#scrollTo=rdQ4_dVaE1Dw
+
+
+# Compare Relation in books
+## Reducción de dimensionalidad
+- PCA : Principal Component Analysis
+	- 
+- SVD: Single Value Decomposition
+	- a
+
+## Latent Semantic Analysis (LSA/LSI) [Deerwester et al, 1990]
+- Map documents (and terms
+
+No sabemos la entidad
+
+## Probabilistic LSA/LSI [Hofmann, 1999]
+- Dividimos 
+
+Mezcla de componentes como representación de tópicos
+El modelo no es capaz de inferir la distribución de 
+No es capaz de mirar en documentos en los que no ha sido entrenado
+
+## Latent Dirichlet Allocation (LDA) [Blei et. al, 2003]
+Es generativo, puede predecir en documentos que no han sido entrenados.
+Podemos usar esta aproximación en corpus muy grandes
+
+
+
+Número de `topics` fijo
+
+## Hyperparameters
+La caja significa un bucle
+- bucle de documentos
+- Topics
+- Palabras
+
+Con å y ß manejamos las proporciones 
+
+> un documento contiene tópicos, porque las palabras de ese documento pertenecen a ese tópico  
+
+Hay que definir
+
+# TOPIC MODEL
+### Valor de å
+Si tuviéramos 15 documentos y 10 tópicos
+> Define como un tópico aparece   
+å = 100, todos los tópicos deberían aparecer en todos los documentos
+å = 1 -> 6 tópicos  son posibles en 
+å = 0.1 -> solo 1 tópico o menos es relevante en el documento
+- å = 0.01 -> solo 1 tópico es relevante en el documento
+	- es interesante si necesitamos clasificar, coger labels 
+	- fallaremos, pero 
+å = 0 -> no cogería ningún tópico
+
+
+## Dirichlet Distribution
+Necesitamos mirar la densidad. Otros compradores no nos servirán.
+KL, **JS**, He, S2JSD
+No podemos usar coseno similaridad
+
+# Topic Model Test Collab
+
+- `perplexity` es reducido según converge
+- `log likelihood` debe aumentar para 
+- GridSearch
+	- obtiene el mejor lda modelo, que obtiene los mejores valores
+
+
+
+> Para seleccionar el número de tópicos para buscar o encontrar,   
+
+> Las distancias son basadas en   
+> Si comparamos documentos sobre 2 tópicos   
+
+Topic model
+- a word es una distribución de todos los tópicos
+- Distance metrics en LDA miden el espacio en , buscamos divergencia
+- top words in a root topic creado por hLDA son **comunes**
+- uniform topic distribution can be obtained when alpha value is  high
+- metric that evaluates the semantic cohesion of the topics is **topic coherence**
+- **LDA works in non-ecludiean spaces -> TRUE**
+	- lad space is simplex
+- the order of words in a document does not matter
+	- en bag-of-words doesn’t
+- document is
+
+# a18-06 Named Entity Recognition
+- Oscar Corcho
+- 20191025
+- 01c_NamedEntityRecognition.pdf
+
+## Problemas
+No hay gold standard para topic model
+
+## NER in an NLP pipeline
+1. Tokenization / Sentence Splitting
+	1. para cada lenguaje necesitas 
+	2. porque la morfología es diferente
+2. Named-Entity-Recognition (NER)
+	1. Identificar las entidades. Extraer 
+3. ### Part-of-Speech (PoS) NN /VB
+4. ### lemmatization
+5. ### Stop-Words
+6. ### External Semantic Resource
+	1. inferir con información  extra
+
+> Requiere mucho conocimiento, para ajustar los parámetros  
+> En ambos campos: estadístico, y gramático  
+
+### Name entity
+> **referent term**or **proper name**.   
+
+- **Main types:**
+	* Organizations 
+	* Persons 
+	* Places 
+	* Temporal units
+		* proyecto Phd. añotator -> en documentos legales 
+			* deadlines
+			* fecha 
+	* Numerical units 
+
+* **Biomedicine:**
+	* Diseases
+	* Proteins
+	* Genes
+	* Substances 
+
+> NER + Clasificación = NERC  
+1. Aproximación ->Linguistic Models
+	1. reglas y heurísticas
+		1. MR + {name}
+	2. Gazetteers
+		1. Diccionarios
+	3. Fácil de implementar con librerías y expresiones regulares
+		1. usado en panamá papers
+2. Probabilistic models
+	1. supervised ML
+	2. Algorithms
+
+## **Definitions. Where is NER used?**
+**informationextraction**
+
+
+## **Named Entity Linking / Named Entity Disambiguation**
+
+![](a18%20WEB%20SCIENCE/Captura%20de%20pantalla%202019-10-25%20a%20las%2011.28.21%202.png)
+
+
+## **Co-reference resolution**
+Cómo nos referimos a una misma entidad con palabras diferentes.
+
+## Herramientas para jugar
+### The one that we developed for ICIJ (Panama Papers)
+o https://github.com/oeg-upm/hner-icij 
+	Grammar Rules para detectar las entidades.
+	Para el consorcio internacional. 
+	Qué papeles hablan de qué personas
+	Los periodistas, no podían utilizar un servicio online.
+### A few open services
+o Dbpedia Spotlight 
+* https://www.dbpedia-spotlight.org/demo/ o NLP4Types 
+	* NER con Linking
+	* Natural Language processing + DBPedia
+		* Es más que una clasificación
+		* Palabras que empiezan por capital case, son potencialmente una única entidad
+	* Existe API
+* http://nlp4types.linkeddata.es/ o OpenCalais 
+	* Solo con SVM
+	* Identifica la entidad del texto completo
+* http://www.opencalais.com/opencalais-demo/ 
+	* Servicio profesional de pago
+	* 
+
+- Nuria Oliver: Vodafone
+
+
+La comunidad avanza con challenges.
+Un corpus con problemas , y se presentan las soluciones en el siguiente 
+Conferencia ACL -> Asociación de computing linguistics 
+
+Describir las evaluaciones.
+Los textos se pueden describir como RDF. O como una lista de palabras y entidades.
+Sentencias  y anotaciones.
+Siempre con **Technical report.** para enseñar las evalucaciones
+
+
+## Challenges
+Scale, Openness, 
+- New entities: gente que aparece en twitter. Lugares.
+- Entidades desconocidas.
+
+- Los diccionarios son muy grandes para gestionar. Y mucha desambiguación.
+- Los textos son muchos. No es un gran problema
+	- pero puede ser tratado paralelamente 
+	- a no ser 
+		- Prob. Topic model 
+
+
+Pablo 2017 : datos.gob.es
+
+
+## NER - Role Classification Model (RCM)
+Linguistic models. Lexical. Heuristics. 
+>  Calleja, P., García-Castro, R., Aguado-de-Cea, L., Gómez-Pérez, A. (2017)  Role-based model for Named Entity Recognition. In Proceedings of the 11th International Conference Recent Advances in Natural Language Processing (RANLP)  
+
+> SNOMED-CT no es completo  
+> Proponer nuevos candidatos.   
+
+- Entity type
+- Entity role
+- Role Classification model: 
+
+
+# Evaluación
+Precisión y Recall
+
+Roles que juegan , las entidades en un texto.
+
+Coger expertos para leer los prospectos y que generan 
+Reacciones adversas. 
+Checkeaban con 3 médicos. 
+No sabes si están haciéndolo en serio o no. Y si el problema es objetivo.
+Los expertos van a identificar siempre entidades diferentes.
+
+### Anotaciones:
+Todos los documentos deben ser anotados al menos por 3 personas.
+Es un corpus que puedo utilizar como ¿Gold standard? == ¿Es esta tarea objetiva?. ¿Hay un porcentaje suficiente de acuerdo en las anotaciones?
+- `Fleiss-Kappa`
+	- [0.5 - 1] -> mucho acuerdo
+		- los casos raros se tratan
+	- [0, 0.5] -> 
+		- 0 == Random == Kappa , M
+		- no lo uses, no es un gold standard
+	- [-1 .. 0] ->
+		- es totalmente subjetivo
+		- posiblemente podemos pasar a recomendación personalizada
+
+- Seleccionar al menos 3 anotadores.
+- Tienen la tarea de anotar
+- Y la colección tiene que ser anotada por al menos 
+- Mnin task
+
+
+- Amazon Mechanical Turk
+	- control de calidad
+- Crowdflower
+- Cities At Night
+
+### Después del Gold 
+
+## Panama papers
+- Mossack Fonseca
+- 
+
+
+
+
+
+# a18-07 - Aggregation of preferences: Voting. Social Choice. Consensus
+
+- Jacinto Gonzalez Pachón
+- 20191108
+- 
+
+Probabilidad | Decisión participativa | Computación Social | preferencias individuales y colectivas.
+
+Unidad 4.
+Conexión de ideas y originalidad.
+Agregación de preferencias
+## ¿Por qué?
+En la web existe una confluencia las dos dimensiones de la ser humano
+Dimensión individual y colectiva.
+Conflicto filosófica
+Ambas dimensiones Muchas veces entran en conflicto.
+La web resalta la divergencia.
+
+Genio | Creador -> 
+Principio de vasos conectados.
+
+Fascismo, Comunismo
+
+Vivimos sobredimensionamiento de ambas dimensiones.
+Emprendedor, Persigue tus sueños, todo a la carta.
+
+Nexo de union grande con estadística:
+1. Esperanza (Media) matemática
+	1. uniformidad, predice, representa el colectivo
+	2. encuentra una parte descriptiva en el todo
+2. Varianza
+	1. singular, error, 
+
+
+- **Agregación de preferencias**: Construir lo colectivo desde lo individual. A través del consenso.
+	- Utilizar el Voto, 
+
+Autonomía -> Variable independiente.
+Independencia : Utopía, no es práctica.
+Hay un tejido social que lo une todo y afecta a las decisiones colectivas.
+
+La sociedad -> Autoridad
+El individuo configura la sociedad. Agregando los individuos.
+
+# Índice
+1. Voting vs Social Choice
+2. Voting Systems
+3. Social Choice: Aggregation of ordinal preferences
+4. Arrows Theorem
+5. Social Welfare: Aggregation of cardinal preferences
+	1. Intensidad de preferencia, y añadir el matiz filosófico en un modelo matemático
+	2. Teoría de juego. Dilema del prisionero.
+		1. lanzar la bomba nuclear
+		2. El modelo matemático es pulsar el botón -> delatar al prisionero
+		3. ojo por ojo como eficiencia
+
+
+# Voting vs Social Choice
+Elementos básicos
+- X is la colección finita de alternativas 
+- m agentes : I = 1..m
+- 
+
+### Regla de votación.
+Cada individuo tiene un orden de preferencias.
+Resultado de votación: **Elegir el mejor**  para el colectivo, para la sociedad.
+
+**Nonranked voting system**
+
+EJEMPLO
+4 candidatos de trabajo
+11 decisores
+
+Cada decisor tiene el ranking en su cabeza, pero deben votar solo a 1.
+Principio de mayoría en lo mejor. -> 
+Si mirásemos la mayoría del peor, ->
+
+
+### 
+Funeral, 
+Como se puede combinar lo bueno
+
+**Filosofía existencialista.**
+- Puntos intermedios:
+	- Familia
+	- Yo me quiero mucho, pero quiero que me quiera otro
+
+### Resolver el problema del voto? -> **SOCIAL CHOICE**
+Sacrificio va inherente al beneficio.
+
+> Excelencia: etimológico === equilibrio.  
+
+## Social Choice
+Se busca un ranking colectivo
+**Ranked / preferencial voting system**
+
+La agregación de preferencias, resuelven los 
+
+EJEMPLO
+4 canciones
+7 Jueces
+
+> Regla de borda: Gestionar sistema de rankings en una organización compleja.  
+> Se suman los puntos de todos los jueces, y al mejor se le dan todos los puntos, al segundo mejor.  
+
+
+- Teorema de arrow: No hay ninguna regla de selección social que evite ser manipulada. Que evite tener una estrategia detrás de la votación.
+No es tan bonito.
+Siempre hay un aspecto , una transgresión de 
+
+Si descalifico una canción  no cumple el **Principio de las alternativas irrelevantes**.
+
+Se podría manipular 
+
+UTIL PARA RECOMENDADORES, 
+
+Antes lo absoluto estaba en las religiones, luego la política, ahora en el individuo y estamos 
+Froid decía que los individuos no son tan coherentes. Hay una fragmentación en la que no puede ser absoluto. 2+2 = 4
+Quieren saber donde encontrar la verdad. -> ESTO ES ABSOLUTO
+
+“Lo ha dicho la máquina” -> Esto es absoluto.
+
+La IA debe luchar contra 
+Detrás hay hipótesis, datos de validación, siempre tienen un bias.
+
+Las matemáticas, el carácter absoluto es un espejismo.
+Necesitamos unidades.
+1+1 = 2 -> solo es verdad en aritmética.
+
+Quien elige las unidades. Tiene le poder.
+Una calificación a dos profesores no se pueden comparar.
+2 wacas.
+
+1. Unidades
+2. Naturaleza / Escalas
+	1. Nominal: x != y
+	2. Ordinal: x != y, x>y
+	3. Intervalar: x != y, x>y , x-y 
+	4. Razón: x != y, x>y, x-y, x/y
+
+Alternativas irrelevantes: Diferencia entre la naturaleza de los mundos.
+
+## Sistemas de votación
+- Entre dos candidatos elijo uno
+	- mayoría: no hay problema
+- Un miembro de varios candidatos
+	- normalmente se usa la mayoría
+	- Puede haber segundas vueltas
+- Alternativas
+	- Sistemas de lista
+		- D’Hont rule -> media más alta
+			- ignora la minoría como la moda
+		- Greatest reminder
+			- leve sesgo hacia la minoría como la media
+	- Approval voting
+		- Vetar candidatos
+
+Problema clásico
+
+- Colectivo VS Individual
+- Principio de la mayoría VS Principio de la minoría
+	- Un alumno 
+		- 10 preguntas de 0 al 10
+			- 0000..10 -> 10/10 = 1
+			- 1111..1 -> 10/10 = 1
+			- mínimo+mayoría /2 = 0+10/2 = 5
+	- Resto mayor
+
+### Ley  DHont
+EJEMPLO Ley  DHont (subasta del escaño)
+24M votantes , 4 partidos y 5 escaños a repartirse
+A -> 8700
+B -> 6800
+C -> 5.200
+D -> 3300
+
+Lista A -> 1 Escaño
+
+Para el segundo escaño
+A -> 8700  / 2
+B -> 6800 / 1
+C -> 5.200 / 1
+D -> 3300 / 1
+
+1. Lista B -> 1 Escaño
+2. Lista C -> 1 Escaño
+3. Lista A -> 1 Escaño
+4. Lista B -> 1 Escaño
+
+### Greatest Reminder
+Alternativa:  Resto más  grande = Greatest Reminder
+Leve sesgo hacia la minoría
+
+
+### Approval voting
+> Mucho peso en lo peor , al contrario del Voting  
+Se votan todos los que quieras, los que no están marcados son vetados
+Hay mucho empate
+
+
+Social: Situaciones paradójicas. Libertad - Igualdad están en conflicto. Es un dilema.
+
+## Social Choice: Agg
+### Regla de Condorcet Alternativa a la regla de borda
+Se cruzan en una matriz. A cuantos elementos domina.
+Evita el problema de lo ordinal.
+
+### Método de Nanson
+Matemático de Alicia en el país de las maravillas
+Es el de borda, intentando evitar el problema de alternativas irrelevantes
+1. Se suman , se descarta el último.
+2. Se vuelve votar
+3. Se repite hasta que solo queda uno
+
+### Método de Copelan
+Cálculo diferencial : Integral (colectivo) VS Derivada(Individual/Partecularización/Un entorno)
+
+C1>C2 … C3>C4
+
+Convertimos la información social para a par.
+Si hubiese un bucle, tendría un fallo. Evita bucles, mediante el empate.
+
+C1 -> domina a X  - es dominado por Y = Z
+Se ordena por Z pudiendo empatar.
+
+### **Método de Cook & Seiford** : Compara las distancias.
+Establecer unas variables de consenso.
+Para determinar los valores de R  calculamos la suma de la distancia de cada voto a cada “unidad”. Y nos quedamos con la unidad del voto más pequeño.
+No se suman. Se estudian las discrepancias por cada voto. Se le asigna el voto con menos discrepancia.
+
+Investigación operativa -> método de asignación. Se sustrae el número más pequeño de cada fila. 
+Con los ceros son las posibles asignaciones.
+Puede haber empates.
+No te da una única solución, te da una familia de soluciones
+
+
+> Las inconsistencias hay que estudiarlas (no tacharlas), porque hay información sobre multidimensionalidad. Un dilema.  
+
+
+## Teorema de Arrow (1951)
+Axiomas
+1. Colectivo racional
+	- Transitivo
+		- evitar bucles 
+	- Completa
+	- no hay duda
+2. No trivialidad del carácter técnico
+	- dos miembros y 3 alternativas
+
+5. Principio de pareto (a es preferido a b
+6. No dictadura 
+	1. El resultado colectivo no puede coincidir nunca con un individuo o con un grupo redcido de individuos
+	2. Que todo el mundo sacrifique algo. parte de su individualidad en  pro de lo colectivo. Siempre tiene que haber alternativa
+	3. La verdad
+	4. Regla de bancarrota: 100K de liquidez
+		1. Todos los acreedores siguen siendo acreedores después del 
+
+6 Axiomas es incompatible y los sistemas son injustos.
+
+## Social Welfare: Carácter ético. Ranking de Intervalo o de razón
+> A es 7 veces más preferido que la B  
+
+- Una sociedad compuesta por dos grupos etnicos, Yang (mayoritario) Yang. Muy polaricados.
+
+Se lleva a votación el dilema de 
+	- Exterminación de Yang VS No exterminación de los Yang
+¿La mayoría tiene el peso suficiente par apedir?
+
+La solución matemática es reducir el conjunto factible.
+Acotar con leyes lo que se puede o no puede hacer.
+	Que eso no se de como opción (política)
+El liberalismo no lo hace con leyes.
+
+> **Comparación entre Intensidad de preferencia.**  
+
+El ~sufrimiento~ de X no se puede compensar ni de lejos el ~beneficio~ de Y
+El sufrimiento de los yang al ser exterminados, no se puede comparar con el beneficio de los ying.
+
+- **IUC**: Interpersonal Utility Comparisons . Talón de aquiles
+
+
+# Otros temas
+> No hay un método justo o injusto. Es el uso que le den a los métodos.  
+
+#### Storytelling - Entroncamiento humanístico
+
+> Para destacar únicamente en hay que entroncar la tradición humanística.  
+> Storytelling -> Narrativa -> Tradición humanística   
+> Una IA Nunca va a poder interpretar los resultados desde un punto de vista humanístico.  
+
+Axioma 7 teoría bayesiana. Tema de creencias.
+Si AnD > BnD
+A|D > B|D
+D estando por descubrir, y siendo A más creíble que B
+Cuando se sabe D, A sigue siendo más creíble que B
+
+
+### Cuadro de rubens: Aquiles es descubrido por ulises
+Gineceo, la madre , travestido. En el núcleo de la confortabilidad.
+Aparece Ulises y logra sacarlo de ahí aunque sabe que va a morir.
+
+
+Contraste de hipótesis, como mucho 0,15.
+El sistema pone remedios (noticias) para separar poblaciones antisistema.
+> De todo se puede hacer negocio  
+
+Decisión participativa : Hasta dónde podemos combinar con métodos computables la unidad individual y colectiva.
+
+> La web va hacia los recomendadores  
+
+Próxima semana . Combinación de Dimensiones.
+
+
+# a18-08 - Decisión participativa
+
+- Jacinto
+- 20191115
+- ``
+
+Buscar un equilibrio de las dos naturalezas: Lo Individual y Lo Colectivo
+Trade off
+
+EJEMPLO
+Caso de críticas de cine de Tree of Life.
+Película de arte y ensayo. Los críticos dieron muy buena nota, excepto uno.
+El público acabó decepcionado.
+
+Tal vez si quieres interpolar 
+
+
+> Principio de la mayoría VS Principio de la minoría  
+
+¿Cómo podemos ?
+
+
+Ejemplo ilustrativo: Alumno con nueve 0’s y un 10
+
+> La media aritmética se convierte en una solución de compromiso entre   
+> el principio de la mayoría y principio de la minoría  
+
+Un datasicence suele eliminar las anomalías, la minoría , para conseguir la uniformidad.
+[Foto pájaros mirando a un lado excepto uno]
+Un caso atípico puede traer disrupción (innovación, mejora, creativo, singularidad)
+En lo colectivo está la tendencia.
+
+> Nunca se ha dado un auge de lo individual y lo colectivo al mismo tiempo. Hasta Internet.  
+
+# Participative Decision Making under satisfying logic
+Grupo de investigación: economía y sostenibilidad del medio natural. ecsen.es
+
+Agregar preferencias individuales para definir la preferencia de grupo.
+
+Los individuos, idealizando, son autónomos, e independientes.
+
+## Teorema de imposibilidad
+**Principios sociales + racionales** son incompatibles.
+Y es lo que queremos resolver.
+
+Seleccionar un método de agregación.
+
+Naturaleza de la información sobre las preferencias. -> casuística -> Casos
+
+Dando un abanico de modelos.
+Vamos a elegir el modelo que equilibre mejor la incompatibilidad.
+
+¿Cómo podemos abordar la incompatibilidad?¿Cómo la vamos a gestionar?
+
+**Programación por meta** - Goal Programming
+
+> En vez de elegir lo mejor, vamos a conseguir lo satisfaciente.  
+> Mediante la búsqueda de consenso.  
+
+
+
+## Información sobre preferencias (CASOS)
+- Clasificación
+	- ordinal - cardinal
+		- Ordinal: cualitativo : a es preferido a b. **Social choice** (Ranking completo). ORDEN
+		- Cardinal: cuantitativo : a es ~7 veces~ más preferido que b.  **Teoría de decisión**. INTENSIDAD de preferencia
+			- permite la comparación entre decisores
+			- Jing-Jang ejemplo
+	- local - global
+		- local: método de comparación Pairwise (por pares)
+		- global: Ranking, teoría de la utilidad
+	- imprecisa - precisa
+		- imprecisa: 
+			- a no es comparable con b
+			- a es entre 5 y 7 veces mejor que b
+		- precisa
+- Representación
+
+## 8 casos de tratar casos individuales y pasarlos a la colectiva
+Matriz de comparación binaria pairwise (por pares)
+
+- Casos 1 y 2 : Ordinal y local
+	- precisa
+	- imprecisa
+
+b12 = 1 -> a1>a2
+b12 = 0 -> a1 ~= a2
+b21 = 1 -> a2>a1
+b21 = 0 -> a2 ~= a1 
+
+Si ambos valores son 0 , entonces son las a’s so similares.
+
+- Casos 3 y 4: ordinal y global
+
+- Casos 5 y 6: cardinal y local: matriz de comparación de valores pairwise (por pares) 
+
+- Caso 7 y 8 cardinal y global : pesos de  preferencias
+Lo ordinal -> binario
+Lo cardinal -> escala
+Preciso -> número
+Impreciso -> intervalo
+
+
+## Buscar solución de compromiso o consenso
+Pasar de lo individual a lo colectivo
+Global (vectores) - Local (matrices)
+
+> Cook, Seiford - modelo final de distancia  
+
+```
+\begin{gather*}
+U_{1}\left( R^{s}\right) \ =\ \sum ^{n}_{i=1}\sum ^{n}_{i=1} w_{i} |R^{i}_{j} -R^{S}_{j} |\\
+\\
+U_{\infty }\left( R^{s}\right) =\min\left\{w_{i} |R^{i}_{j} -R^{S}_{j} |\right\}
+\end{gather*}
+```
+
+![](a18%20WEB%20SCIENCE/math-20191115%20(1)%202.png)
+
+Pretendemos minimizar la distancia o maximizar la discrepancia. Coger al representante más cercano a lo social.
+
+
+## Posible entrada electrónica
+Donde todo se elige y la única política sería el agregador de información
+Libertad + Fraternidad
+```
+\begin{equation*}
+U_{\lambda }\left( R^{s}\right) \ =\ -\ ( 1-\lambda ) U_{\infty }\left( R^{s}\right) -\lambda U_{1}\left( R^{s}\right)
+\end{equation*}
+```
+
+
+![](a18%20WEB%20SCIENCE/math-20191115%20(2)%202.png)
+
+
+## Procedimiento computacional (Operativa)
+Hacer lo compatible lo incompatible.
+
+- Cambio de variable
+- Modelo extendido de programación por meta (Extended GP model)
+	- se pretende rebajar la posición del individuo
+
+```latex
+\begin{gather*}
+R^{s}_{a} +n_{1} -p_{1} =4\\
+n\ y\ p\ son\ variables\ de\ desviación\\
+R^{s}_{a} +n_{2} -p_{2} \ =\ 2\\
+Sacrificio\ de\ un\ individuo\ en\ favor\ del\ consenso\\
+M_{m} \ \psi ( p_{i} ,n_{i})\\
+El\ GP\ pretende\ que\ el\ sacrificio\ sea\ el\ mínimo
+\end{gather*}
+```
+
+![](a18%20WEB%20SCIENCE/math-20191115%20(3)%202.png)
+
+## Extended GP model - Casos resueltos
+1999 - agregar ranking y precisos.
+
+
+# Análisis del alumno que protestó sobre la media aritmética
+Mediana está basado en la mayoría.
+Valor que minimiza la sitancia `x_i-a`
+
+![](a18%20WEB%20SCIENCE/math-20191115%20(4)%202.png)
+
+```latex
+\begin{equation*}
+min\sum ^{n}_{i=1} |x_{i} -a|
+\end{equation*}
+```
+
+
+Moda: lo que más se repite
+
+MODA -> MEDIANA -> MEDIA
+
+Media: minimizar la ditancia `(x_i-a)^2`
+
+Si se ha abandonado la mediana en favor de la moda.
+
+Medida de dispersión, es no diferencial, es decir, que en un entorno de 0 no podemos reducirlo para convertirlo en problema lineal. (Tengo infinitas tangentes)
+
+La moda si es diferencial, si tiene una tangente.
+Al estar elevado al cuadrado, el valor atípico gana importancia.
+
+```
+\begin{equation*}
+min\sum ^{n}_{i=1}( x_{i} -a)^{2}
+\end{equation*}
+```
+
+![](a18%20WEB%20SCIENCE/math-20191115%20(5)%202.png)
+
+![](a18%20WEB%20SCIENCE/diagram-20191115%202.png)
+
+
+> No existe el agregador perfecto.  
+> Los recomendadores solo utilizan un método de agregación. No contrasta entre   
+
+Libertad, Igualdad y Fraternidad.
+
+Prospecto médico: indicaciones y contraindicaciones
+Pensamiento crítico: contemplar la duda razonable. 
+Probabilidad: medida del error y duda razonable (judicial: inocente + pruebas )
+
+> IA -> riesgo ético.   
+> Nostalgia de absoluto y verdad   
+> Pensar que desde un algoritmo se puede alcanzar la objetividad es un error.  
+> Detrás de ese algoritmo siempre tiene una hipótesis   
+
+Paper de Jacinto: The design of socially optimal decisions in 
+
+Mayoría = Libertad
+Minoría = Igualdad
+
+Solución de compromiso:
+La media suele estar bien, pero podemos ajustar y reforzar un lado (mayoría o minoría) moviendo los lambdas
+
+La docencia es en espiral
+
+Probabilidad: Error + actualización de creencias.
+> Engañar a la gente es más fácil que sacarlo del error  
+
+
+- [ ] Entregar Lecture Notes: Indicar que hemos entendido en clase
+
+
+
+
+# a18-09 03 Social Computation / Computación Social
+- Javier Bajo - jbajo
+- 20191122
+- ``
+
+# Índice general
+3.1. Introduction to Social Computation / Introducción a la computación social 
+3.2. Artificial societies. Self-organised systems. Human-Computer Interaction / Sociedades artificiales. Sistemas auto-organizativos. Interacción humano-máquina 
+3.3. Mechanisms for trust and reputation / Mecanismos de reputación y confianza 
+3.4. Citizen Science / Ciencia ciudadana 
+
+
+## Índice
+- Introducción
+- Objetivos
+- Social computing
+
+## Introducción
+Overview y current trenes
+focus en social computing y sistemas multiagentes
+
+Esquema de la presentación:
+Social computing -> agent-based artificial societies -> virtual organizations -> trust and reputation
+
+## Objetivos
+- Overview de social computing y web science
+- overview de maquinas para el modelado de social machines: current trends en sistemas multi agente
+- oportunidad de investigaciones  y areas de aplicación actuales
+
+Web science and social computing
+- la web es la construcción más grande de información humana 
+	- la web transforma la sociedad
+	- la web es 
+- Web science combina multiples disciplinas como sociología, economía , matemáticas, computer science
+- Nos centraremos en **social aspects**  y **social computing**
+
+## Social Behavior
+- Observar el comportamiento social
+	- puede ser organizado o auto-organizado
+- Si miramos individualmente Comportamiento social
+	- Por ejemplo: comportamiento de abejas [Vídeo: Nature Id tags on bees ]
+		- 
+		- Es complicado ver comportamiento únicamente individual en este tipo de sociedades
+	- En el comportamiento humano, 
+- Global social behaviours 
+	- podemos usar algoritmos basados en estos comportamientos biológicos
+		- para resolver problemas
+		- también utilizados para efectos sociales en películas. World War Z -> zombies crean torres como las hormigas.
+
+- Sociedades humanas son avanzadas y tenemos 
+	- Collaborative engineering
+	- comunicación directa, negociaciones , economía internacional, etc
+	- emergent complex global behaviours
+	- es regulada con leyes, normas, institudciones
+	- el comportamiento humano individual está basado en racionalidad, aspectos sociales …
+
+- MABS (Multi-agent-based simulation
+	- inspirados en entidades biológicas para resolver problemas humanos
+		- Ant behavior to solve urban problems (urban biology)
+			- [Urban biology](http://www2.projects.science.uu.nl/urbanbiology/articlepageant.html)
+			- [Ant behaviour to solve urban problems - YouTube](https://youtu.be/6HuienrezEo)
+	- observar el comportamiento humano y simularlo
+		- Evitar colisiones, evitar Bottlenecks: A statical similarity measure of aggregate crowd dynamics.
+			- Con la simulación podemos decidir dónde poner los objetos etc.
+			- Cambiar la distribución de objetos
+			- Simular una evacuación
+				- realmente es difícil capturar todas las complejidades del comportamiento humano.
+			- Videos
+				- [A Statistical Similarity Measure for Aggregate Crowd Dynamics](http://gamma.cs.unc.edu/Entropy/)
+				- [A Statistical Similarity Measure for Aggregate Crowd Dynamics - YouTube](https://www.youtube.com/watch?v=BDagNPJZb-g&feature=youtu.be)
+		- Negotiation in multi-agent systems
+		- Virtual institutions for water rights negotiation
+			- para capturar 
+
+- MAS-based approach (ANTS)
+	- swarm intelligence
+	- emergence
+- Social Behavior - Organizational Theory
+- Symbolic Knowledge Representation (HUMANS)
+	- Self organizing
+	- Re-Organazing
+
+
+Una sociedad es un sistema complejo, intentamos promover la solidaridad y la estabilidad.
+1. Estructura social: Un grafo representando las relaciones entre las diferentes entidades del grupo
+	1. Énfasis en la idea que la sociedad es agrupado en grupos relacionados estructuralmente.
+2. Funciones sociales: en términos de 
+	1. normas
+	2. customs??
+	3. tradiciones
+	4. Instituciones: para controlar educación , seguridad, 
+		1. sociedades reguladas estrictamente
+
+### Funciones sociales : Convenciones que tenemos en nuestra sociedad
+Tenemos objetivos que queremos alcanzar.
+	- En economía queremos definir estados sociales donde la gente intente ser lo mejor posible
+	- En educación : funciones sociales
+		- estudiar en la universidad es “bueno”
+		- es “bueno” ser mejores notas
+
+Las funciones sociales pueden ser óptimas para el conjunto social, pero puede ser malo para la minoría.
+Ejemplo : enviar personas a prisión, reducimos la interacción con la sociedad, ya no puede contagiar su comportamiento malo. Sin embargo estos individuos no mejoran en la cárcel, sino que empeoran. Al final no pueden ser reinsertados en la sociedad.
+
+### Herramientas :
+	- Mason
+	- NetLogo
+		- bibliotecas con modelos para  simular:
+			- altruismo, rumores en redes sociales, clusters de votos, 
+
+- La clave en sociedades humanas
+	- Knowledge representation
+	- razonamiento
+
+Psicología cognitiva: teorías basadas en procesos mentales las cuales están basadas en comportamiento racional
+	- Representación de estímulos externos
+	- manipulación de representación
+	- …
+
+
+- Basic cognitive processes en IA
+	- Sensación
+		- cámaras, micrófonos, presión , narices electrónicas
+	- Percepción: nos permite interpretar el estímulo
+		- 
+	- Atención
+	- Memoria
+
+Procesos cognitivos para : Pensar, Lenguaje e Inteligencia
+
+### Mecanismos  en nuestra sociedad
+- Comportamientos sociales
+	- interacción
+		- dialogue: nlp
+	- cooperation
+		- working together (teams) to achieve a **common goal**
+	- delegation
+		- dividir un problema en problemas más pequeños
+		- task assignments
+	- Coordination
+		- cómo resolver problemas indeseables
+		- manejo del proceso de resolver el problema
+		- resolución de conflictos
+	- Negotiation
+		- acuerdos que son aceptables para todas las partes
+
+> el reto es reorganizar estos mecanismos para una sociedad artificial / híbrida  
+> donde conviven humanos y máquinas  
+
+## Social Computing
+Analizamos comportamiento social
+Analizamos sistemas computacionales
+En la interacción tenemos el Social Computing
+
+> Usar ordenadores para propósitos sociales  
+
+> Web es una nueva herramienta para networking, compartir intereses, publicar pensamientos …  
+
+### Diferentes Definiciones
+- Tom Erickson IBM: sistema técnico que soporta comportamiento social entre las personas y utilizamos este comportamiento para distintos propósitos. Son los mismos comportamientos que
+	- Ejemplos
+		- Amazon, fue el primero en incluir la evaluación de los compradores
+			- Grupos de personas que están computando algo socialmente
+		- Wikipedia: La contribución produce una enciclopedia gigante
+		- Ebay: Subastas online (Auctions)
+			- replica un comportamiento social sobre tecnología
+	- Debemos observar el comportamiento 
+
+- Leo Von Ahn - Captcha : La tecnología que soporta cualquier tipo de comportamiento social atravesado de sistemas computacionales. (blogs, email , wiki, social networks)
+	- Facebook: comunidades online de amigos
+	- LinkedIn: comunidades online para buscar trabajos
+	- Darpa Network Challenge: la solución viene 
+		- [DARPA and the Red Weather Balloon Challenge - YouTube](https://www.youtube.com/watch?v=Fzo4rIpt0gY)
+		- Intentar definir redes más complejas
+		- soltaron 10 globos aerostáticos en estados unidos, cómo podemos localizarlos rápidamente
+			- MIT lo consiguió en 9 horas a través de las redes sociales
+	- Twitter
+		- [Estimating County Health Statistics with Twitter - YouTube](https://www.youtube.com/watch?v=kD6IMqUsXIE)
+			- combinar términos a regiones. Diabetes
+	- Flickr: predecir niveles de nieve desde las imágenes de flickr
+	- Captcha (Completely Automated Public Turing Test to tell Computers and Humans Apart): programa que detecta a un humano. Test de turing completamente público.
+		- leer texto o seleccionando imágenes
+		- ayudamos a mejorar palabras escaneadas OCR , para libros o direcciones de calles google maps
+	- OpenStreetMap: ayudando a mejorar los mapas
+	- Waze: reportando la velocidad
+	- JustEat
+	- Wayook.es : limpieza de hogar
+	- Crowdfunding: Kickstarter | Indiegogo
+	- Nicho todavía sin resolver Según Javier: Muerte
+		- ataúdes, entierros, flores, cremaciones, …
+
+- Lee and Fischetti : la vida real debe estar llenaa de social constraint - the los procesos de la sociedad de la cual nace. Ordenadores puede ayudar si nosotros usamos a crear maquinas sociales abstractas en la web.
+	- Procesos  en los cuales la gente hace el trabajo creativo y la máquina hace la administración
+Trabajo creativo es difícil de definir.
+
+
+- Lo que actualmente hay en la web es:
+	- social media, 
+
+Pensar en soluciones para :
+- solución de problemas sociales distribuidos
+- .
+- .
+
+(La mejor definición)
+- **David Robertson** : El poder del ordenador social reside en la combinación programable de contribuciones desde los humanos y ordenadores.
+	- los humanos aportan: conocimientos, competencias, habilidades
+	- ICT
+
+En el futuro:
+- Dos ejes:
+	- 	Y = Más cómputo 
+	- X = Más gente
+	- Big Data, Big Compute, Conventional computation
+	- Social Machines, Social Networking
+
+Nos movemos muy cercano a los ejes. El reto está en combinar la potencia de ambos ejes.
+- Social machine healthcare and disease
+- Social oganisation of transport
+- Social response to emergencies and crime
+
+- Air traffic control, 
+
+
+- Social computing:
+	- Aplicaciones: 
+	- Infraestructura tecnológica: 
+		- web, database, multimedia, wireless , agente, 
+	-  Theoretical underpinnings
+
+
+Areas de aplicación:
+- Entidades inteligentes y entretenimiento
+	- [Huggable Robot Befriends Girl in Hospital - YouTube](https://www.youtube.com/watch?v=UaRCCA2rRR0)
+	- Alexa: entendiendo NLP y proveyendo soluciones
+	- [Geminoid HI-4, el robot humanoide más avanzado del mundo - YouTube](https://www.youtube.com/watch?v=6z8WY36NUgo)
+		-  [Hiroshi Ishiguro](http://www.geminoid.jp/) : Supervisor de Javier en el año PostDoc 
+
+## Issues abiertos de investigación
+- Representación de información social  y conocimiento
+- Agent-based social modeling
+	- mejorar los modelos
+- Human-agent interaction
+- Analysis and prediction
+- Negociación y sistemas de decision making
+	- agregación de votos, para generalizar
+
+- Trabajos potenciales: 
+	- Crear una presentación sobre websicence y social computing
+		- human-agent interaction
+	- analizar centros de investigación actual y carreras sobre social computing: teoría, aplicaciones, tolos?
+	- analizar conferencias: CFPs, papeles aceptados 
+	- analizar empresas que están investigando o invirtiendo en estas soluciones
+		- MIT han recibido 10Millones $ de twitter para centrarse en 
+
+
+- [ ] trabajo en grupo (2, 3 personas) de 10 páginas sobre algo de nuestro interés + presentación de 10 minutos. Primera o Segunda semana de enero. 10 o 17 de Enero. Si presentamos el 10 , el 17 será libre.
